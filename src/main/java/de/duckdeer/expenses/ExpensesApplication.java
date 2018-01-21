@@ -11,25 +11,24 @@ import org.springframework.context.annotation.Bean;
 public class ExpensesApplication {
 
     public static void main(String[] args) {
-
         SpringApplication.run(ExpensesApplication.class, args);
     }
 
-    @Bean
-    public CommandLineRunner demo(CategoryRepository categoryRepository) {
-        return (args) -> {
-
-
-            //categoryRepository.save(Category.builder().name("Test").type(Category.CategoryType.INCOME).build());
-            categoryRepository.save(new Category("Test", Category.CategoryType.INCOME));
-
-
-            // fetch all
-            System.out.println("Find all categories");
-            System.out.println("----------------------");
-            for (Category category : categoryRepository.findAll()) {
-                System.out.println(category.getName());
-            }
-        };
-    }
+//    @Bean
+//    public CommandLineRunner demo(CategoryRepository categoryRepository) {
+//        return (args) -> {
+//
+//
+//            //categoryRepository.save(Category.builder().name("Test").type(Category.CategoryType.INCOME).build());
+//            categoryRepository.save(new Category("Test", Category.CategoryType.INCOME));
+//
+//
+//            // fetch all
+//            System.out.println("Find all categories");
+//            System.out.println("----------------------");
+//            for (Category category : categoryRepository.findAll()) {
+//                System.out.println(category.getName());
+//            }
+//        };
+//    }
 }
