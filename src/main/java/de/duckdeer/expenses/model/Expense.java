@@ -6,6 +6,10 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@NamedQueries({
+        @NamedQuery(name = "Expense.listByCategory", query = "FROM Expense e WHERE e.category.id = :catId"),
+        @NamedQuery(name = "Expense.listByCategories", query = "FROM Expense e WHERE e.category.id IN (:catIds)")
+})
 @Data
 @Entity
 @Table(name = "EXPENSE")

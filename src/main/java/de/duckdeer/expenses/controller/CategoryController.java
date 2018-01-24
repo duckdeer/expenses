@@ -42,8 +42,8 @@ public class CategoryController {
         }
     }
 
-    @RequestMapping(value = "/categories/insertCategory", method = RequestMethod.POST)
-    public ResponseEntity<String> insertCategory(@RequestBody Category category) {
+    @RequestMapping(value = "/categories/updateCategory", method = RequestMethod.POST)
+    public ResponseEntity<String> updateCategory(@RequestBody Category category) {
         if (category != null) {
             categoryRepository.save(category);
             return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -56,7 +56,7 @@ public class CategoryController {
         if (category != null) {
             categoryRepository.delete(category);
             // TODO correct return value
-            return ResponseEntity.status(HttpStatus.CREATED).build();
+            return ResponseEntity.status(HttpStatus.OK).build();
         }
         return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).build();
     }
