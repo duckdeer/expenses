@@ -9,15 +9,19 @@ import { Category } from './category';
 
 @Injectable()
 export class CategoryService {
-  private baseUrl: string = 'localhost:8080';
+  private baseUrl: string = '/api';
   constructor(private http: Http) { }
 
   ngOnInit() { }
 
   getCategories(): Observable<Category[]> {
-    //let categories$ = this.http.get(`${this.baseUrl}/categories`, {headers: this.getHeaders()}).map(mapCategories);
-    //return categories$;
-    return of(CATEGORIES);
+    let categories = this.http.get(`${this.baseUrl}/categories`, {headers: this.getHeaders()}).map((r) => this.mapCategories(r));
+    return categories;
+    //return of(CATEGORIES);
+  }
+
+  postCategory(category: Category): Observable<Category> {
+    return this.http.post(`${this.baseUrl}/categories/update`, category).map((r) => this.toCategory(r));
   }
 
   private getHeaders(): Headers {
@@ -26,12 +30,15 @@ export class CategoryService {
     return headers;
   }
 
-}
-  function mapCategories(response: Response): Category[] {
-    return response.json().results.map(toCategory);
+  private mapCategories(response: Response): Category[] {
+    return response.json().map(this.toCategory);
   }
 
-  function toCategory(r: any): Category {
+  private mapCategory(response: Response): Category {
+    return this.toCategory(response.json());
+  }
+
+  private toCategory(r: any): Category {
     let category = <Category>({
       id: r.id,
       name: r.name,
@@ -39,4 +46,6 @@ export class CategoryService {
     });
     return category;
   }
+
+}
 

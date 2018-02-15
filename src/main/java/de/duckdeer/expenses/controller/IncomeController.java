@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@RequestMapping("/api")
 public class IncomeController {
 
     @Autowired

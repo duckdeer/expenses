@@ -2,7 +2,6 @@ package de.duckdeer.expenses.controller;
 
 import de.duckdeer.expenses.model.Category;
 import de.duckdeer.expenses.repository.CategoryRepository;
-import org.apache.logging.log4j.message.MapMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
+@RequestMapping("/api")
 public class CategoryController {
 
     @Autowired
