@@ -1,0 +1,17 @@
+<div class="pagination-centered">
+  <h1>Kategorieübersicht</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>NAME</th>
+        <th>TYPE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of categories">
+        <td>{{category.name}}</td>
+        <td>{{category.type}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

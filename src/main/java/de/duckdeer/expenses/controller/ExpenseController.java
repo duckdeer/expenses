@@ -21,29 +21,29 @@ public class ExpenseController {
     @Autowired
     private ExpenseRepository expenseRepository;
 
-    @RequestMapping(name = "expenses/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "expenses/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     private List<Expense> listAllExpenses() {
         return expenseRepository.findAll(Sort.by("date").ascending());
     }
 
-    @RequestMapping(name = "/expenses/{page}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/expenses/{page}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     private Page<Expense> listExpensesForPage(@PathVariable("page") Pageable pageable) {
         return expenseRepository.findAll(pageable);
     }
 
-    @RequestMapping(name ="/expenses/listByCategory", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value ="/expenses/listByCategory", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     private List<Expense> listByCategory(@RequestBody Long categoryId) {
         return expenseRepository.listByCategory(categoryId);
     }
 
-    @RequestMapping(name ="/expenses/listByCategories", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value ="/expenses/listByCategories", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     private List<Expense> listByCategory(@RequestBody List<Long> categoryIds) {
         return expenseRepository.listByCategories(categoryIds);
     }
 
-    @RequestMapping(name = "expenses/updatetExpense", method = RequestMethod.POST)
+    @RequestMapping(value = "expenses/updatetExpense", method = RequestMethod.POST)
     private ResponseEntity<String> updateExpense(@RequestBody Expense expense) {
         if (expense != null) {
             expenseRepository.save(expense);
@@ -52,7 +52,7 @@ public class ExpenseController {
         return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).build();
     }
 
-    @RequestMapping(name = "expense/deleteExpense", method = RequestMethod.POST)
+    @RequestMapping(value = "expense/deleteExpense", method = RequestMethod.POST)
     private ResponseEntity<String> deleteExpense(@RequestBody Expense expense) {
         if (expense != null) {
             expenseRepository.delete(expense);

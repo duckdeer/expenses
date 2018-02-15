@@ -21,7 +21,7 @@ public class IncomeController {
     @Autowired
     private IncomeRepository incomeRepository;
 
-    @RequestMapping(name = "incomes/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "incomes/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     private List<Income> listAllIncomes() {
         Iterable<Income> incomeIt = incomeRepository.findAll();
@@ -32,7 +32,7 @@ public class IncomeController {
         return result;
     }
 
-    @RequestMapping(name = "incomes/updateIncome", method = RequestMethod.POST)
+    @RequestMapping(value = "incomes/updateIncome", method = RequestMethod.POST)
     @ResponseBody
     private ResponseEntity<Income> updateIncome(@RequestBody Income income) {
         if (income != null) {
@@ -42,7 +42,7 @@ public class IncomeController {
         return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).build();
     }
 
-    @RequestMapping(name = "incomes/deleteIncome", method = RequestMethod.POST)
+    @RequestMapping(value = "incomes/deleteIncome", method = RequestMethod.POST)
     @ResponseBody
     private ResponseEntity<Income> deleteIncome(@RequestBody Income income) {
         if (income != null) {
