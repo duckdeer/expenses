@@ -22,7 +22,7 @@ public class CategoryController {
 
     @RequestMapping(value="/categories", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<Category> listCategories() {
+    public List<Category> getAll() {
         Iterable<Category> catIt = categoryRepository.findAll();
         final List<Category> result = new ArrayList<>();
         for (Category category : catIt) {
@@ -42,7 +42,7 @@ public class CategoryController {
         }
     }
 
-    @RequestMapping(value = "/categories/updateCategory", method = RequestMethod.POST)
+    @RequestMapping(value = "/categories/update", method = RequestMethod.POST)
     public ResponseEntity<String> updateCategory(@RequestBody Category category) {
         if (category != null) {
             categoryRepository.save(category);
@@ -51,8 +51,8 @@ public class CategoryController {
         return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).build();
     }
 
-    @RequestMapping(value = "/categories/deleteCategory", method = RequestMethod.POST)
-    public ResponseEntity<String> deleteCategory(@RequestBody Category category) {
+    @RequestMapping(value = "/categories/delete", method = RequestMethod.POST)
+    public ResponseEntity<String> delete(@RequestBody Category category) {
         if (category != null) {
             categoryRepository.delete(category);
             // TODO correct return value

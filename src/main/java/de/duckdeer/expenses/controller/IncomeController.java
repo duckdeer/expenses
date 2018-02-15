@@ -23,7 +23,7 @@ public class IncomeController {
 
     @RequestMapping(value = "incomes/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    private List<Income> listAllIncomes() {
+    public List<Income> getAll() {
         Iterable<Income> incomeIt = incomeRepository.findAll();
         List<Income> result = new ArrayList<>();
         for (Income income : incomeIt) {
@@ -32,9 +32,9 @@ public class IncomeController {
         return result;
     }
 
-    @RequestMapping(value = "incomes/updateIncome", method = RequestMethod.POST)
+    @RequestMapping(value = "incomes/update", method = RequestMethod.POST)
     @ResponseBody
-    private ResponseEntity<Income> updateIncome(@RequestBody Income income) {
+    public ResponseEntity<Income> update(@RequestBody Income income) {
         if (income != null) {
             incomeRepository.save(income);
             return ResponseEntity.status(HttpStatus.OK).build();
@@ -42,9 +42,9 @@ public class IncomeController {
         return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).build();
     }
 
-    @RequestMapping(value = "incomes/deleteIncome", method = RequestMethod.POST)
+    @RequestMapping(value = "incomes/delete", method = RequestMethod.POST)
     @ResponseBody
-    private ResponseEntity<Income> deleteIncome(@RequestBody Income income) {
+    public ResponseEntity<Income> delete(@RequestBody Income income) {
         if (income != null) {
             incomeRepository.delete(income);
             return ResponseEntity.status(HttpStatus.OK).build();
