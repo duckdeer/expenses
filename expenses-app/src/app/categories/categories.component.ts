@@ -12,6 +12,9 @@ export class CategoriesComponent implements OnInit {
 
   categories: Category[];
 
+  public showForm = false;
+  public newCategory = new Category();
+
   constructor(private categoryService: CategoryService) { }
 
   ngOnInit() {
@@ -21,4 +24,11 @@ export class CategoriesComponent implements OnInit {
   getCategories(): void {
     this.categoryService.getCategories().subscribe(categories => this.categories = categories);
   }
+
+  submitForm(): void {
+    this.categoryService.postCategory(this.newCategory).subscribe((response) => {
+      this.getCategories();
+    });
+  }
+
 }

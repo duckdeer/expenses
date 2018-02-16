@@ -1,17 +1,25 @@
 <div class="pagination-centered">
   <h1>Kategorieübersicht</h1>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>NAME</th>
-        <th>TYPE</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let category of categories">
-        <td>{{category.name}}</td>
-        <td>{{category.type}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div>
+    <button *ngIf="!showForm" (click)="showForm = true">Erstellen</button>
+    <button *ngIf="showForm" (click)="submitForm()">Speichern</button>
+    <input type="text" *ngIf="showForm" [(ngModel)]="newCategory.name" />
+    <input type="text" *ngIf="showForm" [(ngModel)]="newCategory.type" />
+  </div>
+  <div class="col-md-4 col-md-offset-4">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="text-center">NAME</th>
+          <th class="text-center">TYPE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let category of categories">
+          <td>{{category.name}}</td>
+          <td>{{category.type}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
