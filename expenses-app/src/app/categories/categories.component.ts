@@ -19,7 +19,6 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit() {
     this.getCategories();
-    console.log("Loaded categories");
   }
 
   getCategories(): void {

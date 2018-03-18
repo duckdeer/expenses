@@ -21,6 +21,7 @@ export class IncomesComponent implements OnInit {
 
   ngOnInit() {
     this.getIncomes();
+    this.getCategories();
   }
 
   private getIncomes(): void {

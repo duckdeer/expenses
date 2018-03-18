@@ -4,11 +4,12 @@ import { Observable } from 'rxjs/Observable';
 
 import { BaseServiceService } from './base-service.service';
 import { Income } from "./income";
+import { CategoryService } from './category.service';
 
 @Injectable()
 export class IncomeService extends BaseServiceService {
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private categoryService: CategoryService) {
     super();
   }
 
@@ -36,7 +37,7 @@ export class IncomeService extends BaseServiceService {
       validFrom: r.validFrom,
       validThru: r.validThru,
       type: r.type,
-      category: r.category
+      category: this.categoryService.toCategory(r.category)
     });
     return income;
   }

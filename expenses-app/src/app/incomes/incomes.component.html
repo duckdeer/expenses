@@ -12,11 +12,12 @@
       <label>Gültig bis: </label>
       <input type="date" [(ngModel)]="newIncome.validThru"/><br>
       <label>Typ: </label>
-      <label class="radio-inline"><input type="radio" *ngIf="showForm" value="INCOME" [(ngModel)]="newIncome.type" name="optIncome">Einnahme</label>
-      <label class="radio-inline"><input type="radio" *ngIf="showForm" value="EXPENSE" [(ngModel)]="newIncome.type" name="optIncome">Ausgabe</label><br>
+      <label class="radio-inline"><input type="radio" *ngIf="showForm" value="MONTHLY" [(ngModel)]="newIncome.type" name="optIncome">Monatlich</label>
+      <label class="radio-inline"><input type="radio" *ngIf="showForm" value="YEARLY" [(ngModel)]="newIncome.type" name="optIncome">Jährlich</label><br>
+      <label class="radio-inline"><input type="radio" *ngIf="showForm" value="EXTRA" [(ngModel)]="newIncome.type" name="optIncome">Extra</label><br>
 
       <label>Kategorie:</label>
-      <select>
+      <select [(ngModel)]="newIncome.category">
         <option *ngFor="let category of categories">{{category.name}}</option>
       </select>
       <br>
