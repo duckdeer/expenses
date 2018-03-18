@@ -4,8 +4,8 @@ export class Income {
   id: number;
   value: number;
   name: string;
-  validFrom: Date;
-  validThru: Date;
+  validFrom: String;
+  validThru: String;
   type: string;
   category: Category;
 }

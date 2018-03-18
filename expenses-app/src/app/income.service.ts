@@ -14,31 +14,22 @@ export class IncomeService extends BaseServiceService {
   }
 
   getIncomes(): Observable<Income[]> {
-    return this.http.get(`${this.baseUrl}/incomes`, {headers: this.getHeaders()}).map((r) => this.mapIncomes(r));
+    return this.http.get(`${this.baseUrl}/incomes`, {headers: this.getHeaders()}).map((r) => r.json());
   }
 
-  private mapIncomes(response: Response): Income[] {
-    return response.json().map(this.toIncome);
+  createIncome(income: CreateIncomeCommand): Observable<Income> {
+    return this.http.post(`${this.baseUrl}/incomes/update`, income, {headers: this.getHeaders()}).map(r => r.json());
   }
 
-  private mapIncome(response: Response): Income {
-    return this.toIncome(response.json());
-  }
+}
 
-  postIncome(income: Income): Observable<Income> {
-    return this.http.post(`${this.baseUrl}/incomes/update`, income).map((r) => this.toIncome(r));
-  }
+export interface CreateIncomeCommand {
 
-  private toIncome(r: any): Income {
-    let income = <Income>({
-      id: r.id,
-      value: r.value,
-      name: r.name,
-      validFrom: r.validFrom,
-      validThru: r.validThru,
-      type: r.type,
-      category: this.categoryService.toCategory(r.category)
-    });
-    return income;
-  }
+  name: String;
+  value: Number;
+  validFrom: String;
+  validThru: String;
+  type: String;
+  categoryId: Number;
+
 }

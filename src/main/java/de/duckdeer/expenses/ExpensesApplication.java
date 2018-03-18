@@ -41,6 +41,7 @@ public class ExpensesApplication {
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
+            // TODO: csrf protection
             http.csrf().disable().authorizeRequests().anyRequest().permitAll();
         }
     }
