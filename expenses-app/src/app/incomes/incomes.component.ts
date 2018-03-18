@@ -33,7 +33,15 @@ export class IncomesComponent implements OnInit {
   }
 
   submitForm(): void {
-    this.incomeService.postIncome(this.newIncome).subscribe((response) => {
+    const createIncomeCommand = {
+      categoryId: this.newIncome.category.id,
+      name: this.newIncome.name,
+      type: this.newIncome.type,
+      validFrom: this.newIncome.validFrom,
+      validThru: this.newIncome.validThru,
+      value: this.newIncome.value
+    };
+    this.incomeService.createIncome(createIncomeCommand).subscribe((response) => {
       this.getIncomes();
     });
   }
