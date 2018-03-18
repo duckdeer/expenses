@@ -51,13 +51,19 @@ public class CategoryController {
         return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).build();
     }
 
-    @RequestMapping(value = "/categories/delete", method = RequestMethod.POST)
-    public ResponseEntity<String> delete(@RequestBody Category category) {
-        if (category != null) {
-            categoryRepository.delete(category);
+    @RequestMapping(value = "/categories/delete/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+        if (id != null) {
+            Optional<Category> srvCatMaybe = categoryRepository.findById(id);
+            if (srvCatMaybe.isPresent()) {
+                Category srvCat = srvCatMaybe.get();
+                srvCat.setActive(Boolean.FALSE);
+                categoryRepository.save(srvCat);
+            }
+
             // TODO correct return value
             return ResponseEntity.status(HttpStatus.OK).build();
         }
-        return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 }

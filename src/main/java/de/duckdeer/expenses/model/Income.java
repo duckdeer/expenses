@@ -34,7 +34,7 @@ public class Income {
 
     @Column(name = "TYPE")
     @Enumerated(value = EnumType.STRING)
-    private IncomeType type;
+    private IncomeType type = IncomeType.MONTHLY;
 
     @ManyToOne(targetEntity = Category.class)
     private Category category;

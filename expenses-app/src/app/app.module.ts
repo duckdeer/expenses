@@ -13,6 +13,7 @@ import { ExpensesComponent } from './expenses/expenses.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { IncomeService } from './income.service';
 import { ExpenseService } from './expense.service';
+import { BaseServiceService } from './base-service.service';
 
 
 @NgModule({
@@ -29,7 +30,7 @@ import { ExpenseService } from './expense.service';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [CategoryService, IncomeService, ExpenseService],
+  providers: [CategoryService, IncomeService, ExpenseService, BaseServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

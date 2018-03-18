@@ -31,4 +31,7 @@ public class Category {
     @Column(name = "TYPE")
     @Enumerated(value = EnumType.STRING)
     private CategoryType type;
+
+    @Column(name = "ACTIVE")
+    private Boolean active = Boolean.TRUE;
 }

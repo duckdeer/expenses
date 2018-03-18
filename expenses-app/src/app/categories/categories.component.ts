@@ -19,6 +19,7 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit() {
     this.getCategories();
+    console.log("Loaded categories");
   }
 
   getCategories(): void {
@@ -31,4 +32,10 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
+  remove(category: Category): void {
+    this.categoryService.deleteCategory(category).subscribe((response) => {
+      this.getCategories();
+    });
+    console.log("Delete " + category.name);
+  }
 }

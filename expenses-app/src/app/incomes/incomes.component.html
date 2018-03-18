@@ -1,3 +1,51 @@
-<div class="container">
-  <h1>Einnahmen</h1>
+<h1>Einnahmen</h1>
+<div>
+  <button *ngIf="!showForm" (click)="showForm = true" class="glyphicon glyphicon-plus">Hinzufügen</button>
+
+  <div *ngIf="showForm">
+      <label>Name: </label>
+      <input type="text" *ngIf="showForm" [(ngModel)]="newIncome.name" /><br>
+      <label>Wert: </label>
+      <input type="text" [(ngModel)]="newIncome.value" /><br>
+      <label>Gültig ab: </label>
+      <input type="date" [(ngModel)]="newIncome.validFrom"/><br>
+      <label>Gültig bis: </label>
+      <input type="date" [(ngModel)]="newIncome.validThru"/><br>
+      <label>Typ: </label>
+      <label class="radio-inline"><input type="radio" *ngIf="showForm" value="INCOME" [(ngModel)]="newIncome.type" name="optIncome">Einnahme</label>
+      <label class="radio-inline"><input type="radio" *ngIf="showForm" value="EXPENSE" [(ngModel)]="newIncome.type" name="optIncome">Ausgabe</label><br>
+
+      <label>Kategorie:</label>
+      <select>
+        <option *ngFor="let category of categories">{{category.name}}</option>
+      </select>
+      <br>
+      <button *ngIf="showForm" (click)="submitForm()" (click)="showForm = false">Speichern</button>
+      <button *ngIf="showForm" (click)="showForm = false">Abbrechen</button>
+      <hr>
+  </div>
+</div>
+<div class="col-lg-10 col-lg-offset-1">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th class="text-center">NAME</th>
+        <th class="text-center">WERT</th>
+        <th class="text-center">GÜLTIG AB</th>
+        <th class="text-center">GÜLTIG BIS</th>
+        <th class="text-center">TYP</th>
+        <th class="text-center">KATEGORIE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let income of incomes">
+        <td>{{income.name}}</td>
+        <td>{{income.value}}</td>
+        <td>{{income.validFrom}}</td>
+        <td>{{income.validThru}}</td>
+        <td>{{income.type}}</td>
+        <td>{{income.category.name}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

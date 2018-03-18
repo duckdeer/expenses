@@ -1,25 +1,34 @@
-<div class="pagination-centered">
-  <h1>Kategorieübersicht</h1>
-  <div>
-    <button *ngIf="!showForm" (click)="showForm = true">Erstellen</button>
-    <button *ngIf="showForm" (click)="submitForm()">Speichern</button>
-    <input type="text" *ngIf="showForm" [(ngModel)]="newCategory.name" />
-    <input type="text" *ngIf="showForm" [(ngModel)]="newCategory.type" />
+<h1>Kategorieübersicht</h1>
+<div>
+  <button *ngIf="!showForm" (click)="showForm = true" class="glyphicon glyphicon-plus">Hinzufügen</button>
+
+  <div *ngIf="showForm">
+      <label>Name: </label>
+      <input type="text" *ngIf="showForm" [(ngModel)]="newCategory.name" /><br>
+      <label>Typ: </label>
+      <label class="radio-inline"><input type="radio" *ngIf="showForm" value="INCOME" [(ngModel)]="newCategory.type" name="optCategory">Einnahme</label>
+      <label class="radio-inline"><input type="radio" *ngIf="showForm" value="EXPENSE" [(ngModel)]="newCategory.type" name="optCategory">Ausgabe</label><br>
+      <button *ngIf="showForm" (click)="submitForm()" (click)="showForm = false">Speichern</button>
+      <button *ngIf="showForm" (click)="showForm = false">Abbrechen</button>
+      <hr>
   </div>
-  <div class="col-md-4 col-md-offset-4">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th class="text-center">NAME</th>
-          <th class="text-center">TYPE</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let category of categories">
-          <td>{{category.name}}</td>
-          <td>{{category.type}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+</div>
+<div class="col-md-4 col-md-offset-4">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th class="text-center">NAME</th>
+        <th class="text-center">TYPE</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of categories">
+        <td>{{category.name}}</td>
+        <td>{{category.type}}</td>
+        <div></div>
+        <td><button  (click)="remove(category)" class="glyphicon glyphicon-remove"></button></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
