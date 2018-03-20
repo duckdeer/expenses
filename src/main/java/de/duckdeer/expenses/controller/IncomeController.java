@@ -51,17 +51,22 @@ public class IncomeController {
     public ResponseEntity<Income> update(@RequestBody CreateIncomeCommand createIncomeCommand) {
         if (createIncomeCommand != null) {
             final Category category = categoryRepository.findById(createIncomeCommand.getCategoryId()).get();
-            Income income = new Income();
-            income.setCategory(category);
-            income.setName(createIncomeCommand.getName());
-            income.setValue(createIncomeCommand.getValue());
-            income.setValidFrom(createIncomeCommand.getValidFrom());
-            income.setValidThru(createIncomeCommand.getValidThru());
-            income.setType(createIncomeCommand.getType());
+            Income income = createIncome(createIncomeCommand, category);
             incomeRepository.save(income);
             return ResponseEntity.status(HttpStatus.OK).build();
         }
         return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).build();
+    }
+
+    private Income createIncome(@RequestBody CreateIncomeCommand createIncomeCommand, Category category) {
+        Income income = new Income();
+        income.setCategory(category);
+        income.setName(createIncomeCommand.getName());
+        income.setValue(createIncomeCommand.getValue());
+        income.setValidFrom(createIncomeCommand.getValidFrom());
+        income.setValidThru(createIncomeCommand.getValidThru());
+        income.setType(createIncomeCommand.getType());
+        return income;
     }
 
     @RequestMapping(value = "incomes/delete", method = RequestMethod.POST)
@@ -83,7 +88,5 @@ public class IncomeController {
         private LocalDate validThru;
         private Income.IncomeType type;
         private Long categoryId;
-
     }
-
 }

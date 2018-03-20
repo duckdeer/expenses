@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, RequestOptions, Headers } from '@angular/http';
+import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { BaseServiceService } from './base-service.service';
@@ -20,7 +20,6 @@ export class IncomeService extends BaseServiceService {
   createIncome(income: CreateIncomeCommand): Observable<Income> {
     return this.http.post(`${this.baseUrl}/incomes/update`, income, {headers: this.getHeaders()}).map(r => r.json());
   }
-
 }
 
 export interface CreateIncomeCommand {
@@ -31,5 +30,4 @@ export interface CreateIncomeCommand {
   validThru: String;
   type: String;
   categoryId: Number;
-
 }

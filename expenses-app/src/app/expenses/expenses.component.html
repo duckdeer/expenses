@@ -1,3 +1,48 @@
-<div class="container">
-  <h1>Ausgaben</h1>
+<h1>Ausgaben</h1>
+<div>
+    <button *ngIf="!showForm" (click)="showForm = true" class="glyphicon glyphicon-plus">Hinzufügen</button>
+
+    <div *ngIf="showForm">
+        <label>Datum: </label>
+        <input type="date" [(ngModel)]="newExpense.date" /><br>
+        <label>Wert (in €): </label>
+        <input type="number" [(ngModel)]="newExpense.value"/><br>
+        <label>Bemerkung: </label>
+        <input type="input" [(ngModel)]="newExpense.note"/><br>
+        <label>Kategorie:</label>
+        <select [(ngModel)]="newExpense.category">
+          <option *ngFor="let category of expenseCategories" [ngValue]="category">{{category.name}}</option>
+        </select>
+        <br>
+        <button *ngIf="showForm" (click)="submitForm()" (click)="showForm = false">Speichern</button>
+        <button *ngIf="showForm" (click)="showForm = false">Abbrechen</button>
+        <hr>
+    </div>
 </div>
+
+<div class="col-lg-10 col-lg-offset-1">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th class="text-center">Datum</th>
+        <th class="text-center">Wert</th>
+        <th class="text-center">Bemerkung</th>
+        <th class="text-center">Kategorie</th>
+        <th class="text-center">Type</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let expense of expenses">
+        <td>{{expense.date}}</td>
+        <td>{{expense.value}} €</td>
+        <td>{{expense.note}}</td>
+        <td>{{expense.category.name}}</td>
+        <td>{{expense.type | lowercase}}</td>
+        <div></div>
+        <!--<td><button  (click)="remove(expense)" class="glyphicon glyphicon-remove"></button></td>-->
+      </tr>
+    </tbody>
+  </table>
+</div>
+

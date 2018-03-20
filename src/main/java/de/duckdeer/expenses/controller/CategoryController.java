@@ -31,6 +31,27 @@ public class CategoryController {
         return result;
     }
 
+    @RequestMapping(value="/categories/income", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<Category> getIncomeCategories() {
+        return getCategoriesByType(Category.CategoryType.INCOME);
+    }
+
+    @RequestMapping(value="/categories/expense", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<Category> getExpenseCategories() {
+        return getCategoriesByType(Category.CategoryType.EXPENSE);
+    }
+
+    private List<Category> getCategoriesByType(Category.CategoryType type) {
+        Iterable<Category> catIt = categoryRepository.findByType(type);
+        List<Category> result = new ArrayList<>();
+        for (Category category : catIt) {
+            result.add(category);
+        }
+        return result;
+    }
+
     @RequestMapping(value = "/categories/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Category getById(@PathVariable Long id) {
@@ -48,7 +69,7 @@ public class CategoryController {
             categoryRepository.save(category);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         }
-        return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
     @RequestMapping(value = "/categories/delete/{id}", method = RequestMethod.DELETE)
@@ -61,7 +82,6 @@ public class CategoryController {
                 categoryRepository.save(srvCat);
             }
 
-            // TODO correct return value
             return ResponseEntity.status(HttpStatus.OK).build();
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

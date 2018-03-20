@@ -19,6 +19,14 @@ export class CategoryService extends BaseServiceService {
     return categories;
   }
 
+  getIncomeCategories(): Observable<Category[]> {
+    return this.http.get(`${this.baseUrl}/categories/income`, {headers: this.getHeaders()}).map((r) => this.mapCategories(r));
+  }
+
+  getExpenseCategories(): Observable<Category[]> {
+    return this.http.get(`${this.baseUrl}/categories/expense`, {headers: this.getHeaders()}).map((r) => this.mapCategories(r));
+  }
+
   postCategory(category: Category): Observable<Category> {
     return this.http.post(`${this.baseUrl}/categories/update`, category).map((r) => this.toCategory(r));
   }

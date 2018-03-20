@@ -5,10 +5,10 @@
   <div *ngIf="showForm">
       <label>Name: </label>
       <input type="text" *ngIf="showForm" [(ngModel)]="newIncome.name" /><br>
-      <label>Wert: </label>
-      <input type="number" [(ngModel)]="newIncome.value" /><br>
+      <label>Wert (in €): </label>
+      <input type="number" [(ngModel)]="newIncome.value"/><br>
       <label>Gültig ab: </label>
-      <input type="date" [(ngModel)]="newIncome.validFrom"/><br>
+      <input type="date" [(ngModel)]="newIncome.validFrom" /><br>
       <label>Gültig bis: </label>
       <input type="date" [(ngModel)]="newIncome.validThru"/><br>
       <label>Typ: </label>
@@ -18,7 +18,7 @@
 
       <label>Kategorie:</label>
       <select [(ngModel)]="newIncome.category">
-        <option *ngFor="let category of categories" [ngValue]="category">{{category.name}}</option>
+        <option *ngFor="let category of incomeCategories" [ngValue]="category">{{category.name}}</option>
       </select>
       <br>
       <button *ngIf="showForm" (click)="submitForm()" (click)="showForm = false">Speichern</button>

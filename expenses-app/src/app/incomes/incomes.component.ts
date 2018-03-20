@@ -12,7 +12,8 @@ import { CategoryService } from '../category.service';
 export class IncomesComponent implements OnInit {
 
   incomes: Income[];
-  categories: Category[];
+  incomeCategories: Category[];
+  currentDate: Date = new Date();
 
   public showForm = false;
   public newIncome = new Income();
@@ -21,15 +22,15 @@ export class IncomesComponent implements OnInit {
 
   ngOnInit() {
     this.getIncomes();
-    this.getCategories();
+    this.getIncomeCategories();
   }
 
   private getIncomes(): void {
     this.incomeService.getIncomes().subscribe(incomes => this.incomes = incomes);
   }
 
-  private getCategories(): void {
-    this.categoryService.getCategories().subscribe(categories => this.categories = categories);
+  private getIncomeCategories(): void {
+    this.categoryService.getIncomeCategories().subscribe(categories => this.incomeCategories = categories);
   }
 
   submitForm(): void {
