@@ -3,14 +3,38 @@
   <button *ngIf="!showForm" (click)="showForm = true" class="glyphicon glyphicon-plus">Hinzufügen</button>
 
   <div *ngIf="showForm">
-      <label>Name: </label>
-      <input type="text" *ngIf="showForm" [(ngModel)]="newCategory.name" /><br>
-      <label>Typ: </label>
-      <label class="radio-inline"><input type="radio" *ngIf="showForm" value="INCOME" [(ngModel)]="newCategory.type" name="optCategory">Einnahme</label>
-      <label class="radio-inline"><input type="radio" *ngIf="showForm" value="EXPENSE" [(ngModel)]="newCategory.type" name="optCategory">Ausgabe</label><br>
-      <button *ngIf="showForm" (click)="submitForm()" (click)="showForm = false">Speichern</button>
-      <button *ngIf="showForm" (click)="showForm = false">Abbrechen</button>
-      <hr>
+    <div class="row col-md-offset-4">
+      <div class="col-md-2">
+        <label>Name: </label>
+      </div>
+      <div class="col-md-2">
+        <input type="text" *ngIf="showForm" [(ngModel)]="newCategory.name" /><br>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+    <div class="row col-md-offset-4">
+      <div class="col-md-2">
+        <label>Typ: </label>
+      </div>
+      <div class="col-md-2 text-left">
+        <label class="radio-inline"><input type="radio" *ngIf="showForm" value="INCOME" [(ngModel)]="newCategory.type" name="optCategory">Einnahme</label>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+    <div class="row col-md-offset-6">
+      <div class="col-md-2 text-left">
+        <label class="radio-inline"><input type="radio" *ngIf="showForm" value="EXPENSE" [(ngModel)]="newCategory.type" name="optCategory">Ausgabe</label><br>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+    <div class="row col-md-offset-5">
+      <div class="col-md-2">
+        <button *ngIf="showForm" (click)="submitForm()" (click)="showForm = false">Speichern</button>
+      </div>
+      <div class="col-md-2">
+        <button *ngIf="showForm" (click)="showForm = false">Abbrechen</button>
+      </div>
+    </div>
   </div>
 </div>
 <div class="col-lg-10 col-lg-offset-1">

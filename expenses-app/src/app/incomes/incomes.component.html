@@ -3,27 +3,82 @@
   <button *ngIf="!showForm" (click)="showForm = true" class="glyphicon glyphicon-plus">Hinzufügen</button>
 
   <div *ngIf="showForm">
-      <label>Name: </label>
-      <input type="text" *ngIf="showForm" [(ngModel)]="newIncome.name" /><br>
-      <label>Wert (in €): </label>
-      <input type="number" [(ngModel)]="newIncome.value"/><br>
-      <label>Gültig ab: </label>
-      <input type="date" [(ngModel)]="newIncome.validFrom" /><br>
-      <label>Gültig bis: </label>
-      <input type="date" [(ngModel)]="newIncome.validThru"/><br>
-      <label>Typ: </label>
-      <label class="radio-inline"><input type="radio" *ngIf="showForm" value="MONTHLY" [(ngModel)]="newIncome.type" name="optIncome">Monatlich</label>
-      <label class="radio-inline"><input type="radio" *ngIf="showForm" value="YEARLY" [(ngModel)]="newIncome.type" name="optIncome">Jährlich</label><br>
-      <label class="radio-inline"><input type="radio" *ngIf="showForm" value="EXTRA" [(ngModel)]="newIncome.type" name="optIncome">Extra</label><br>
-
-      <label>Kategorie:</label>
-      <select [(ngModel)]="newIncome.category">
-        <option *ngFor="let category of incomeCategories" [ngValue]="category">{{category.name}}</option>
-      </select>
-      <br>
-      <button *ngIf="showForm" (click)="submitForm()" (click)="showForm = false">Speichern</button>
-      <button *ngIf="showForm" (click)="showForm = false">Abbrechen</button>
-      <hr>
+    <div class="row col-md-offset-4">
+      <div class="col-md-2">
+        <label>Name: </label>
+      </div>
+      <div class="col-md-2">
+        <input type="text" *ngIf="showForm" [(ngModel)]="newIncome.name" /><br>
+      </div>
+    </div>
+    <div>
+      <div class="row col-md-offset-4">
+        <div class="col-md-2">
+          <label>Wert (in €): </label>
+        </div>
+        <div class="col-md-2">
+          <input type="number" [(ngModel)]="newIncome.value"/><br>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="row col-md-offset-4">
+        <div class="col-md-2">
+          <label>Gültig ab: </label>
+        </div>
+        <div class="col-md-2">
+          <input type="date" [(ngModel)]="newIncome.validFrom" /><br>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="row col-md-offset-4">
+        <div class="col-md-2">
+          <label>Gültig bis: </label>
+        </div>
+        <div class="col-md-2">
+          <input type="date" [(ngModel)]="newIncome.validThru"/><br>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="row col-md-offset-4">
+        <div class="col-md-2">
+          <label>Typ: </label>
+        </div>
+        <div class="col-md-6 text-left">
+          <label class="radio-inline"><input type="radio" *ngIf="showForm" value="MONTHLY" [(ngModel)]="newIncome.type" name="optIncome">Monatlich</label>
+        </div>
+      </div>
+      <div class="row col-md-offset-6">
+        <div class="col-md-6 text-left">
+          <label class="radio-inline"><input type="radio" *ngIf="showForm" value="YEARLY" [(ngModel)]="newIncome.type" name="optIncome">Jährlich</label><br>
+        </div>
+      </div>
+      <div class="row col-md-offset-6">
+        <div class="col-md-6 text-left">
+          <label class="radio-inline"><input type="radio" *ngIf="showForm" value="EXTRA" [(ngModel)]="newIncome.type" name="optIncome">Extra</label><br>
+        </div>
+      </div>
+    </div>
+    <div class="row col-md-offset-4">
+      <div class="col-md-2">
+        <label>Kategorie:</label>
+      </div>
+      <div class="col-md-2">
+        <select [(ngModel)]="newIncome.category">
+          <option *ngFor="let category of incomeCategories" [ngValue]="category">{{category.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row col-md-offset-5">
+      <div class="col-md-2">
+          <button *ngIf="showForm" (click)="submitForm()" (click)="showForm = false">Speichern</button>
+      </div>
+      <div class="col-md-2">
+        <button *ngIf="showForm" (click)="showForm = false">Abbrechen</button>
+      </div>
+    </div>
   </div>
 </div>
 <div class="col-lg-10 col-lg-offset-1">

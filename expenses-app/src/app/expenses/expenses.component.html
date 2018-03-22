@@ -3,20 +3,48 @@
     <button *ngIf="!showForm" (click)="showForm = true" class="glyphicon glyphicon-plus">Hinzufügen</button>
 
     <div *ngIf="showForm">
-        <label>Datum: </label>
-        <input type="date" [(ngModel)]="newExpense.date" /><br>
-        <label>Wert (in €): </label>
-        <input type="number" [(ngModel)]="newExpense.value"/><br>
-        <label>Bemerkung: </label>
-        <input type="input" [(ngModel)]="newExpense.note"/><br>
-        <label>Kategorie:</label>
-        <select [(ngModel)]="newExpense.category">
-          <option *ngFor="let category of expenseCategories" [ngValue]="category">{{category.name}}</option>
-        </select>
-        <br>
-        <button *ngIf="showForm" (click)="submitForm()" (click)="showForm = false">Speichern</button>
-        <button *ngIf="showForm" (click)="showForm = false">Abbrechen</button>
-        <hr>
+      <div class="row col-md-offset-4">
+        <div class="col-md-2">
+          <label>Datum: </label>
+        </div>
+        <div class="col-md-2">
+          <input type="date" [(ngModel)]="newExpense.date" /><br>
+        </div>
+      </div>
+      <div class="row col-md-offset-4">
+        <div class="col-md-2">
+          <label>Wert (in €): </label>
+        </div>
+        <div class="col-md-2">
+          <input type="number" [(ngModel)]="newExpense.value"/><br>
+        </div>
+      </div>
+      <div class="row col-md-offset-4">
+        <div class="col-md-2">
+          <label>Bemerkung: </label>
+        </div>
+        <div class="col-md-2">
+          <input type="input" [(ngModel)]="newExpense.note" /><br>
+        </div>
+      </div>
+      <div class="row col-md-offset-4">
+        <div class="col-md-2">
+          <label>Kategorie:</label>
+        </div>
+        <div class="col-md-2">
+          <select [(ngModel)]="newExpense.category">
+            <option *ngFor="let category of expenseCategories" [ngValue]="category">{{category.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row col-md-offset-5">
+        <div class="col-md-2">
+          <button *ngIf="showForm" (click)="submitForm()" (click)="showForm = false">Speichern</button>
+        </div>
+        <div class="col-md-2">
+          <button *ngIf="showForm" (click)="showForm = false">Abbrechen</button>
+        </div>
+      </div>
     </div>
 </div>
 
