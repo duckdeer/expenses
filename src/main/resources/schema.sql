@@ -11,6 +11,12 @@
 -- Schema expense
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `expense` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+
+-- Create user
+--CREATE USER 'expense'@'localhost' IDENTIFIED BY 'expense';
+--GRANT USAGE ON *.* TO 'expense'@'localhost' IDENTIFIED BY 'expense';
+--GRANT ALL PRIVILEGES ON *.* TO 'expense'@'localhost';
+
 USE `expense` ;
 
 -- -----------------------------------------------------

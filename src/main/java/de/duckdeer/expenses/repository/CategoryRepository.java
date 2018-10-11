@@ -8,4 +8,6 @@ import java.util.List;
 public interface CategoryRepository extends CrudRepository<Category, Long> {
 
     List<Category> findByType(Category.CategoryType type);
+
+    Category findByName(String name);
 }
