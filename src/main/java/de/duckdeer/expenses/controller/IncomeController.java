@@ -10,15 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -58,6 +51,20 @@ public class IncomeController {
         return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).build();
     }
 
+    @RequestMapping(value = "/incomes/delete/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+        if (id != null) {
+            Optional<Income> srvIncomeMaybe = incomeRepository.findById(id);
+            if (srvIncomeMaybe.isPresent()) {
+                Income srvIncome = srvIncomeMaybe.get();
+                incomeRepository.delete(srvIncome);
+            }
+
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
     private Income createIncome(@RequestBody CreateIncomeCommand createIncomeCommand, Category category) {
         Income income = new Income();
         income.setCategory(category);
@@ -67,16 +74,6 @@ public class IncomeController {
         income.setValidThru(createIncomeCommand.getValidThru());
         income.setType(createIncomeCommand.getType());
         return income;
-    }
-
-    @RequestMapping(value = "incomes/delete", method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseEntity<Income> delete(@RequestBody Income income) {
-        if (income != null) {
-            incomeRepository.delete(income);
-            return ResponseEntity.status(HttpStatus.OK).build();
-        }
-        return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).build();
     }
 
     @Data
