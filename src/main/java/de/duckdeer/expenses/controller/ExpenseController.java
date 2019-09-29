@@ -19,6 +19,7 @@ import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -88,13 +89,20 @@ public class ExpenseController {
         return expense;
     }
 
-    @RequestMapping(value = "expense/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "expenses/delete", method = RequestMethod.POST)
     public ResponseEntity<String> delete(@RequestBody Expense expense) {
         if (expense != null) {
             expenseRepository.delete(expense);
             return ResponseEntity.status(HttpStatus.OK).build();
         }
         return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).build();
+    }
+
+    @RequestMapping(value = "expenses/range", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<Expense> getExpensesForDateRange(@RequestParam("start") String start, @RequestParam("end") String end) {
+        List<Expense> result = expenseRepository.findByDateBetween(LocalDate.parse(start), LocalDate.parse(end));
+        return result.isEmpty() ? Collections.emptyList() : result;
     }
 
     @Data
