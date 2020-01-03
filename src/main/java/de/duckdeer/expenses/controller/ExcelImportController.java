@@ -66,8 +66,6 @@ public class ExcelImportController {
             setValue(expense, row);
             setNote(expense, row);
 
-            expense.setType(Expense.ExpenseType.NORMAL);
-
             expenseRepository.save(expense);
             rowCount++;
 

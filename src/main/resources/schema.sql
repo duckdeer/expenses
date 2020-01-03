@@ -42,7 +42,6 @@ CREATE TABLE IF NOT EXISTS `expense`.`EXPENSE` (
   `VALUE` DECIMAL(10,2) NOT NULL,
   `NOTE` VARCHAR(255) NULL,
   `CATEGORY_ID` INT NOT NULL,
-  `TYPE` VARCHAR(25) NULL COMMENT 'FIXED, NORMAL',
   PRIMARY KEY (`ID`),
   INDEX `FK1_EXPENSE_idx` (`CATEGORY_ID` ASC),
   CONSTRAINT `FK1_EXPENSE`
@@ -52,6 +51,25 @@ CREATE TABLE IF NOT EXISTS `expense`.`EXPENSE` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `expense`.`EXPENSE_FIXED`
+-- -----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `expense`.`EXPENSE_FIXED` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `VALID_FROM` DATE NOT NULL,
+  `VALID_THRU` DATE NOT NULL,
+  `VALUE` DECIMAL(10,2) NOT NULL,
+  `NOTE` VARCHAR(255) NULL,
+  `CATEGORY_ID` INT NOT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `FK1_EXPENSE_FIXED_idx` (`CATEGORY_ID` ASC),
+  CONSTRAINT `FK1_EXPENSE_FIXED`
+    FOREIGN KEY (`CATEGORY_ID`)
+    REFERENCES `expense`.`CATEGORY` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `expense`.`INCOME`

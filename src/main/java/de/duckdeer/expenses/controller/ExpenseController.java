@@ -1,10 +1,10 @@
 package de.duckdeer.expenses.controller;
 
+import de.duckdeer.expenses.command.expenses.CreateExpenseCommand;
 import de.duckdeer.expenses.model.Category;
 import de.duckdeer.expenses.model.Expense;
 import de.duckdeer.expenses.repository.CategoryRepository;
 import de.duckdeer.expenses.repository.ExpenseRepository;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
@@ -85,7 +84,6 @@ public class ExpenseController {
         expense.setValue(createExpenseCommand.getValue());
         expense.setNote(createExpenseCommand.getNote());
         expense.setCategory(category);
-        expense.setType(createExpenseCommand.getType());
         return expense;
     }
 
@@ -103,15 +101,5 @@ public class ExpenseController {
     public List<Expense> getExpensesForDateRange(@RequestParam("start") String start, @RequestParam("end") String end) {
         List<Expense> result = expenseRepository.findByDateBetween(LocalDate.parse(start), LocalDate.parse(end));
         return result.isEmpty() ? Collections.emptyList() : result;
-    }
-
-    @Data
-    public static class CreateExpenseCommand {
-
-        private LocalDate date;
-        private BigDecimal value;
-        private String note;
-        private Long categoryId;
-        private Expense.ExpenseType type;
     }
 }

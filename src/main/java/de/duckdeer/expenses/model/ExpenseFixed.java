@@ -6,21 +6,20 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@NamedQueries({
-        @NamedQuery(name = "Expense.listByCategory", query = "FROM Expense e WHERE e.category.id = :catId"),
-        @NamedQuery(name = "Expense.listByCategories", query = "FROM Expense e WHERE e.category.id IN (:catIds)")
-})
 @Data
 @Entity
-@Table(name = "EXPENSE")
-public class Expense {
+@Table(name = "EXPENSE_FIXED")
+public class ExpenseFixed {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "DATE")
-    private LocalDate date;
+    @Column(name = "VALID_FROM")
+    private LocalDate validFrom;
+
+    @Column(name = "VALID_THRU")
+    private LocalDate validThru;
 
     @Column(name = "VALUE")
     private BigDecimal value;
